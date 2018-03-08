@@ -1,3 +1,6 @@
+/*
+ * @author Tian Luan 1899271
+ */
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class SimplePoolThread implements ISimplePoolThread {
@@ -13,13 +16,13 @@ public class SimplePoolThread implements ISimplePoolThread {
 	@Override
 	public void run() {
 		while (true) {
-			if (!tasksQueue.isEmpty()) {
-				try {
-					tasksQueue.take().run();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+			try {
+				tasksQueue.take().run();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				break;
 			}
+			
 		}
 
 	}
