@@ -36,6 +36,8 @@ public class Client {
 		String string = protocol.createMessage("sign-up", user, pass);
 		try {
 			outToServer.writeBytes(string + "\n");
+			outToServer.flush();
+
 			String[] response = this.getResponse();
 			return response;
 		} catch (IOException e) {
@@ -49,8 +51,12 @@ public class Client {
 	 */
 	public String[] signin(String user, String pass){
 		String string = protocol.createMessage("sign-in", user, pass);
+		System.out.println("in Client signin: " + string);
+
 		try {
 			outToServer.writeBytes(string + "\n");
+			outToServer.flush();
+
 			String[] response = this.getResponse();
 			if(response[1].equals("true")){
 				System.out.println("Sign-in successful.");
